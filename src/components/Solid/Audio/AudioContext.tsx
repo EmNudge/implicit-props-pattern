@@ -1,3 +1,4 @@
+/** @jsxImportSource solid-js */
 import { createContext, useContext, onCleanup } from 'solid-js'
 
 const AudioContextContext = createContext({

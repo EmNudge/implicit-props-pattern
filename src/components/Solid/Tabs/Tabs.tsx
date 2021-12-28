@@ -1,3 +1,4 @@
+/** @jsxImportSource solid-js */
 import { 
     createSignal, createContext, useContext, 
     onCleanup, onMount, createMemo, For,
