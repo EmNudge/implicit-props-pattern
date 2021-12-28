@@ -5,11 +5,11 @@ import {
 } from 'solid-js';
 
 const TabsContext = createContext({
-    addTab: (label: string, children) => { console.error('using old addTab') },
-    removeTab: (label: string) => { console.error('using old removeTab') }
+    addTab: (_label: string, _children) => { console.error('using old addTab') },
+    removeTab: (_label: string) => { console.error('using old removeTab') }
 });
 
-export const TabContent = (props) => {
+export const TabContent = (props: { label: string, children: unknown }) => {
     const { addTab, removeTab } = useContext(TabsContext);
 
     onMount(() => addTab(props.label, props.children));
@@ -18,12 +18,12 @@ export const TabContent = (props) => {
     return <></>;
 };
 
-const TabsContainer = (props) => {
+const TabsContainer = (props: { children: unknown }) => {
     const [tabs, setTabs] = createSignal<{ [label: string]: any }>({});
     const [currentTab, setCurrentTab] = createSignal('');
 
     const providerData = {
-        addTab(label: string, children) {
+        addTab(label: string, children: unknown) {
             setTabs(prev => {
                 if (!Object.keys(prev).length) setCurrentTab(label);
                 return { ...prev, [label]: children };
@@ -37,11 +37,11 @@ const TabsContainer = (props) => {
         },
     };
 
-    const selectedTab = createMemo(() => {
+    const selectedTab = (() => {
         const tab = tabs()[currentTab()];
-        if (!tab && tabs().length) return Reflect.ownKeys(tabs())[0]
+        if (!tab && Object.keys(tabs()).length) return Reflect.ownKeys(tabs())[0]
         return tab;
-    })
+    })();
 
     return (
         <div className="tabs-container">
@@ -50,7 +50,7 @@ const TabsContainer = (props) => {
                     {(label) => 
                         <span
                             className={label === currentTab() ? 'selected' : undefined}
-                            onClick={() => setCurrentTab(label)}
+                            onClick={() => {alert('hey!'); setCurrentTab(label)}}
                         >
                             {label}
                         </span>

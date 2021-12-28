@@ -25,10 +25,10 @@
 	<div class="tabs">
 		{#each $tabs as label}
 			<span
-						key={label}
-						class={label === $activeTab ? 'selected' : undefined}
-						on:click={() => $activeTab = label}
-				>
+				key={label}
+				class={label === $activeTab ? 'selected' : undefined}
+				on:click={() => $activeTab = label}
+			>
 				{label}
 			</span>
 		{/each}

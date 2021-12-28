@@ -16,16 +16,16 @@ export const TabContent = ({ children, label }) => {
 };
 
 const TabsContainer = ({ children }) => {
-  const [tabs, setTabs] = useState({});
-  const [currentTab, setCurrentTab] = useState(null);
+  const [tabs, setTabs] = useState<{ [label: string]: JSX.Element }>({});
+  const [currentTab, setCurrentTab] = useState('');
 
-  const addTab = (label, children) => {
+  const addTab = (label: string, children: JSX.Element) => {
     setTabs(prev => {
       if (!Object.keys(prev).length) setCurrentTab(label);
       return { ...prev, [label]: children };
     });
   };
-  const removeTab = label => {
+  const removeTab = (label: string) => {
     const { [label]: x, ...rem } = tabs;
     setTabs(rem);
   };

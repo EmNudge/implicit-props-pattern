@@ -1,5 +1,4 @@
 /** @jsxImportSource solid-js */
-import { createSignal } from "solid-js";
 import TabContainer, { TabContent } from './Tabs';
 
 export default function App() {

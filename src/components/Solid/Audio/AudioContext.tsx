@@ -6,7 +6,7 @@ const AudioContextContext = createContext({
   parentNode: null
 });
 
-export const AudioContextNode = (props) => {
+export const AudioContextNode = (props: { children: unknown }) => {
   const audioContext = new AudioContext();
 
   const providerData = {
@@ -23,7 +23,7 @@ export const AudioContextNode = (props) => {
   );
 };
 
-export const GainNode = (props) => {
+export const GainNode = (props: { volume: number, children: unknown }) => {
   const { audioContext, parentNode } = useContext(AudioContextContext);
 
   const gainNode = audioContext.createGain();
@@ -42,7 +42,7 @@ export const GainNode = (props) => {
   );
 };
 
-export const OscillatorNode = (props) => {
+export const OscillatorNode = (props: { type: string, frequency: number }) => {
   const { audioContext, parentNode } = useContext(AudioContextContext);
 
   const oscillator = audioContext.createOscillator();
