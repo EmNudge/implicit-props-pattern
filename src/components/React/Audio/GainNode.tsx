@@ -1,7 +1,7 @@
 import React, { useContext, useMemo } from 'react';
 import { AudioContextContext } from './AudioContext';
 
-export default ({ children, volume }: { children: JSX.Element, volume?: number }) => {
+const GainNode: React.FC<{ volume?: number }> = ({ children, volume }) => {
   const { audioContext, parentNode } = useContext(AudioContextContext);
 
   const gainNode = audioContext.createGain();
@@ -22,3 +22,5 @@ export default ({ children, volume }: { children: JSX.Element, volume?: number }
     </AudioContextContext.Provider>
   );
 };
+
+export default GainNode;

@@ -5,7 +5,7 @@ const TabsContext = React.createContext({
   removeTab: () => {}
 });
 
-export const TabContent = ({ children, label }) => {
+export const TabContent: React.FC<{ label: string}> = ({ children, label }) => {
   const { addTab, removeTab } = useContext(TabsContext);
   useEffect(() => {
     addTab(label, children);
@@ -15,11 +15,11 @@ export const TabContent = ({ children, label }) => {
   return null;
 };
 
-const TabsContainer = ({ children }) => {
-  const [tabs, setTabs] = useState<{ [label: string]: JSX.Element }>({});
+const TabsContainer: React.FC = ({ children }) => {
+  const [tabs, setTabs] = useState<{ [label: string]: React.Element }>({});
   const [currentTab, setCurrentTab] = useState('');
 
-  const addTab = (label: string, children: JSX.Element) => {
+  const addTab = (label: string, children: React.Element) => {
     setTabs(prev => {
       if (!Object.keys(prev).length) setCurrentTab(label);
       return { ...prev, [label]: children };

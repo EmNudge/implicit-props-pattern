@@ -5,7 +5,7 @@ export const AudioContextContext = React.createContext({
   parentNode: null
 });
 
-export default ({ children }: { children: JSX.Element }) => {
+const AudioContextNode: React.FC = ({ children }) => {
   const audioContext = new window.AudioContext();
 
   const providerData = useMemo(
@@ -26,3 +26,5 @@ export default ({ children }: { children: JSX.Element }) => {
     </AudioContextContext.Provider>
   );
 };
+
+export default AudioContextNode;

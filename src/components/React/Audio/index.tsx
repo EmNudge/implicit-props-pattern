@@ -9,7 +9,7 @@ export default function App() {
   return (
     <div>
       <button onClick={() => setShowAudio(prev => !prev)}>
-        {showAudio ? 'Stop' : 'Play'} Audio
+        {showAudio ? 'Stop Audio' : 'PlayAudio'}
       </button>
 
       {showAudio && (
