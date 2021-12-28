@@ -1,6 +1,6 @@
 <template>
   <button @click="playPause">
-    {{ isPlaying ? 'Pause' : 'Play' }}
+    {{ isPlaying ? 'Stop Audio' : 'Play Audio' }}
   </button>
 
   <AudioContextNode v-if="isPlaying">

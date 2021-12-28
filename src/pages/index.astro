@@ -7,9 +7,8 @@ import SvelteAudio from '../components/Svelte/Audio/index.svelte';
 import SvelteTabs from '../components/Svelte/Tabs/index.svelte';
 import ReactAudio from '../components/React/Audio/index.tsx';
 import ReactTabs from '../components/React/Tabs/index.tsx';
-// import SolidAudio from '../components/Solid/Audio/index.tsx';
-// import SolidTabs from '../components/Solid/Tabs/index.tsx';
-
+import SolidAudio from '../components/Solid/Audio/index.tsx';
+import SolidTabs from '../components/Solid/Tabs/index.tsx';
 ---
 
 <html lang="en">
@@ -22,6 +21,7 @@ import ReactTabs from '../components/React/Tabs/index.tsx';
 		<style>
 			h1 {
 				text-align: center;
+				margin: 0;
 			}
 			.frameworks {
 				display: grid;
@@ -52,10 +52,10 @@ import ReactTabs from '../components/React/Tabs/index.tsx';
 				<ReactTabs client:visible slot="tabs" />
 			</Framework>
 
-			<!-- <Framework name="Solid">
+			<Framework name="Solid">
 				<SolidAudio client:visible slot="audio" />
 				<SolidTabs client:visible slot="tabs" />
-			</Framework> -->
+			</Framework>
 		</div>
 	</body>
 </html>

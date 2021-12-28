@@ -1,10 +1,9 @@
+import React from 'react';
 import TabContainer, { TabContent } from './Tab';
-import './style.css';
 
 export default function App() {
   return (
     <div>
-      <h1>Implicit Props Pattern</h1>
       <TabContainer>
         <TabContent label="tab 1">
           <h1>Hello tab 1</h1>

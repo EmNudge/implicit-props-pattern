@@ -19,6 +19,7 @@ body {
 	display: flex;
 	background: #0ef5;
 	user-select: none;
+	color: black;
 }
 .tabs span {
 	padding: 5px 10px;
@@ -29,6 +30,7 @@ body {
 	cursor: auto;
 }
 .tabs-container .content {
+	color: black;
 	background: skyblue;
 	padding: 20px;
 	height: 100%;
