@@ -1,1 +1,4 @@
-# implicit-props-pattern
+# Implicit Props Pattern
+A Framework Comparison
+
+Made using Astro!

@@ -1,0 +1,49 @@
+---
+export interface Props {
+  name: string;
+}
+const { name } = Astro.props;
+---
+
+<div class="container">
+    <h2>{name}</h2>
+
+    <h3>Audio Context</h3>
+    <slot name="audio" />
+
+    <hr>
+
+    <h3>Tabs</h3>
+    <slot name="tabs" />
+</div>
+
+<style>
+    .container {
+        position: relative;
+        outline: 2px solid aqua;
+        padding: 20px;
+        box-sizing: border-box;
+        max-width: 600px;
+    }
+    h2, h3 {
+        margin: 0;
+    }
+    h2 {
+        position: absolute;
+        top: -25px;
+        left: 5px;
+        background: var(--bg);
+        padding: 5px 15px;
+        z-index: 2;
+    }
+    h3 {
+        margin-bottom: 10px;
+        font-weight: 400;
+        letter-spacing: .25ch;
+    }
+    hr {
+        opacity: .5;
+        border-bottom: 0;
+        margin: 20px 0;
+    }
+</style>

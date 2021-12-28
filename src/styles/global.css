@@ -1,0 +1,40 @@
+:root {
+	--bg: #222;
+}
+
+html,
+body {
+	font-family: system-ui;
+	margin: 0;
+}
+
+body {
+	padding: 2rem;
+    color: white;
+    background: var(--bg);
+}
+
+/* tabs content */
+.tabs {
+	display: flex;
+	background: #0ef5;
+	user-select: none;
+}
+.tabs span {
+	padding: 5px 10px;
+	cursor: pointer;
+}
+.tabs span.selected {
+	background: skyblue;
+	cursor: auto;
+}
+.tabs-container .content {
+	background: skyblue;
+	padding: 20px;
+	height: 100%;
+}
+.tabs-container h1 {
+	font-size: 1.5em;
+	margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+}

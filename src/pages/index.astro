@@ -1,0 +1,61 @@
+---
+import Framework from '../components/Framework.astro';
+
+import VueAudio from '../components/Vue/Audio/index.vue';
+import VueTabs from '../components/Vue/Tabs/index.vue';
+import SvelteAudio from '../components/Svelte/Audio/index.svelte';
+import SvelteTabs from '../components/Svelte/Tabs/index.svelte';
+import ReactAudio from '../components/React/Audio/index.tsx';
+import ReactTabs from '../components/React/Tabs/index.tsx';
+// import SolidAudio from '../components/Solid/Audio/index.tsx';
+// import SolidTabs from '../components/Solid/Tabs/index.tsx';
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Implicit Props</title>
+		<link rel="stylesheet" type="text/css" href={Astro.resolve('../styles/global.css')} />
+		<style>
+			h1 {
+				text-align: center;
+			}
+			.frameworks {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				grid-gap: 40px;
+				max-width: 1000px;
+				margin: 0 auto;
+				padding: 40px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>The Implicit Props Pattern</h1>
+		<div class="frameworks">
+			<Framework name="Vue">
+				<VueAudio client:visible slot="audio" />
+				<VueTabs client:visible slot="tabs" />
+			</Framework>
+
+			<Framework name="Svelte">
+				<SvelteAudio client:visible slot="audio" />
+				<SvelteTabs client:visible slot="tabs" />
+			</Framework>
+
+			<Framework name="React">
+				<ReactAudio client:visible slot="audio" />
+				<ReactTabs client:visible slot="tabs" />
+			</Framework>
+
+			<!-- <Framework name="Solid">
+				<SolidAudio client:visible slot="audio" />
+				<SolidTabs client:visible slot="tabs" />
+			</Framework> -->
+		</div>
+	</body>
+</html>
