@@ -2,7 +2,7 @@
 	import { setContext, onDestroy } from 'svelte';
 	
 	const AudioContext = window.AudioContext || window.webkitAudioContext;
-  const audioContext = new AudioContext();
+  	const audioContext = new AudioContext();
 
 	setContext('audio-context', audioContext);
 	setContext('audio-node', audioContext.destination);

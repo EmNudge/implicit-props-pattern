@@ -1,5 +1,5 @@
 <script>
-	import { getContext, setContext } from 'svelte';
+	import { getContext, setContext, beforeUpdate } from 'svelte';
 	
 	export let volume = .2;
 	
@@ -9,6 +9,11 @@
 	const gainNode = audioContext.createGain();
 	gainNode.connect(parentNode);
 	gainNode.gain.value = volume;
+	
+	beforeUpdate(() => {
+		const endTime = audioContext.currentTime + .2;
+		gainNode.gain.linearRampToValueAtTime(volume, endTime);
+	});
 	
 	setContext('audio-node', gainNode);
 </script>

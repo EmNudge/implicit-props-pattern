@@ -1,5 +1,5 @@
 /** @jsxImportSource solid-js */
-import { createContext, useContext, onCleanup } from 'solid-js'
+import { createContext, useContext, onCleanup, createEffect } from 'solid-js'
 
 const AudioContextContext = createContext({
   audioContext: null,
@@ -30,6 +30,11 @@ export const GainNode = (props: { volume: number, children: unknown }) => {
   gainNode.connect(parentNode);
   gainNode.gain.value = props.volume || 0.2;
 
+  createEffect(() => {
+    const endTime = audioContext.currentTime + .2;
+		gainNode.gain.linearRampToValueAtTime(props.volume, endTime);
+  });
+
   const providerData = {
     audioContext,
     parentNode: gainNode
@@ -50,6 +55,15 @@ export const OscillatorNode = (props: { type: string, frequency: number }) => {
   oscillator.frequency.value = props.frequency || 100;
   oscillator.connect(parentNode);
   oscillator.start(0);
+
+  createEffect(() => {
+    oscillator.type = props.type;
+  });
+  createEffect(() => {
+		const endTime = audioContext.currentTime + .2;
+		oscillator.frequency.linearRampToValueAtTime(props.frequency, endTime);
+  });
+  
 
   return null;
 };
