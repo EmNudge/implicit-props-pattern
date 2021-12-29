@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useEffect, useContext, useMemo } from 'react';
 import { AudioContextContext } from './AudioContext';
 
 interface Props {
@@ -9,11 +9,15 @@ interface Props {
 const OscillatorNode: React.FC<Props> = ({ children, frequency, type }) => {
   const { audioContext, parentNode } = useContext(AudioContextContext);
 
-  const oscillator = audioContext.createOscillator();
-  oscillator.type = type || 'sine';
-  oscillator.frequency.value = frequency || 100;
-  oscillator.connect(parentNode);
-  oscillator.start(0);
+  const oscillator = useMemo(() => {
+    const node = audioContext.createOscillator();
+    node.type = type || 'sine';
+    node.frequency.value = frequency || 100;
+    node.connect(parentNode);
+    node.start(0);
+
+    return node;
+  }, []);
 
   const providerData = useMemo(
     () => ({
@@ -22,6 +26,15 @@ const OscillatorNode: React.FC<Props> = ({ children, frequency, type }) => {
     }),
     [frequency, type]
   );
+
+  useEffect(() => {
+    oscillator.type = type ?? 'sine';
+  }, [type]);
+  
+  useEffect(() => {
+    const endTime = audioContext.currentTime + .2;
+    oscillator.frequency.linearRampToValueAtTime(frequency, endTime);
+  }, [frequency]);
 
   return (
     <AudioContextContext.Provider value={providerData}>

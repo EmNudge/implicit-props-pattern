@@ -6,16 +6,26 @@ import React, { useState } from 'react';
 export default function App() {
   const [showAudio, setShowAudio] = useState(false);
 
+  const [frequency, setFrequency] = useState(300);
+  const changeFrequency = (e: React.InputEvent) =>
+    setFrequency(Number(e.currentTarget.value));
+
   return (
     <div>
       <button onClick={() => setShowAudio(prev => !prev)}>
         {showAudio ? 'Stop Audio' : 'PlayAudio'}
       </button>
 
+      <input 
+        type="range" min="100" max="1000" step="5" 
+        value={frequency}
+        onInput={changeFrequency}
+      />
+
       {showAudio && (
         <AudioContextNode>
           <GainNode volume={.2}>
-            <OscillatorNode frequency={300} type='sine' />
+            <OscillatorNode frequency={frequency} type='sine' />
           </GainNode>
         </AudioContextNode>
       )}

@@ -6,7 +6,7 @@ export const AudioContextContext = React.createContext({
 });
 
 const AudioContextNode: React.FC = ({ children }) => {
-  const audioContext = new window.AudioContext();
+  const audioContext = useMemo(() => new window.AudioContext(), []);
 
   const providerData = useMemo(
     () => ({
@@ -18,7 +18,7 @@ const AudioContextNode: React.FC = ({ children }) => {
 
   useEffect(() => {
     return () => audioContext.close();
-  });
+  }, []);
 
   return (
     <AudioContextContext.Provider value={providerData}>
