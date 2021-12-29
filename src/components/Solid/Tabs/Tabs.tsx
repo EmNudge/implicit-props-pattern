@@ -9,7 +9,7 @@ const TabsContext = createContext({
     removeTab: (_label: string) => { console.error('using old removeTab') }
 });
 
-export const TabContent = (props: { label: string, children: Element[] }) => {
+export const TabContent = (props: { label: string, children: Element[] | unknown }) => {
     const { addTab, removeTab } = useContext(TabsContext);
 
     addTab(props.label, props.children);
@@ -18,7 +18,7 @@ export const TabContent = (props: { label: string, children: Element[] }) => {
     return <></>;
 };
 
-const TabsContainer = (props: { children: Element[] }) => {
+const TabsContainer = (props: { children: Element[] | unknown }) => {
     const [tabs, setTabs] = createSignal<{ [label: string]: any }>({});
     const [currentTab, setCurrentTab] = createSignal('');
 

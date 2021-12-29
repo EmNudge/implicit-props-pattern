@@ -14,7 +14,7 @@ export default function App() {
       <Show when={showAudio()}>
         <AudioContextNode>
           <GainNode volume={.2}>
-            <OscillatorNode frequency={200} type='sine' />
+            <OscillatorNode frequency={300} type='sine' />
           </GainNode>
         </AudioContextNode>
       </Show>

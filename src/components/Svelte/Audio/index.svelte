@@ -12,10 +12,8 @@
 
 {#if showAudio}
 	<AudioContext>
-		<GainNode>
-			<Oscillator />
-			<Oscillator type="square" />
-			<Oscillator type="sawtooth" frequency="1000" />
+		<GainNode volume={.2}>
+			<Oscillator frequency={300} type="sine" />
 		</GainNode>
 	</AudioContext>
 {/if}

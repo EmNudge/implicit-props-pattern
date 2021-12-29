@@ -4,8 +4,8 @@
   </button>
 
   <AudioContextNode v-if="isPlaying">
-    <GainNode>
-      <OscillatorNode />
+    <GainNode :volume=".2">
+      <OscillatorNode :frequency="300" type="sine" />
     </GainNode>
   </AudioContextNode>
 </template>

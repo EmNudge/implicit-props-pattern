@@ -14,8 +14,8 @@ export default function App() {
 
       {showAudio && (
         <AudioContextNode>
-          <GainNode volume={1}>
-            <OscillatorNode />
+          <GainNode volume={.2}>
+            <OscillatorNode frequency={300} type='sine' />
           </GainNode>
         </AudioContextNode>
       )}
