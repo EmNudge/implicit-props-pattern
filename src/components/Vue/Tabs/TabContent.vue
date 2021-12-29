@@ -3,20 +3,19 @@
 </template>
 
 <script>
-import { inject, onUnmounted, watchEffect } from 'vue'
+import { inject, onUnmounted } from 'vue'
+import { key } from './TabContainer.vue'
 
 export default {
   props: {
     label: String,
   },
 
-  setup ({ label }) {
-    const { addTab, removeTab, activeTab } = inject('TAB_CONTAINER')
+  setup({ label }) {
+    const { addTab, removeTab, activeTab } = inject(key)
 
     addTab(label)
-    onUnmounted(() => {
-      removeTab(label)
-    })
+    onUnmounted(() => removeTab(label))
 
     return { activeTab }
   }

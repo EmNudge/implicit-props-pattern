@@ -17,23 +17,24 @@
 </template>
 
 <script>
-import { provide, onUnmounted, ref } from 'vue'
+import { provide, ref } from 'vue'
+
+export const key = Symbol()
 
 export default {
   setup() {
     const tabs = ref([])
     const activeTab = ref('')
 
-    const addTab = (label) => {
-      if (!tabs.value.length) activeTab.value = label
-      tabs.value.push(label)
-    }
-    const removeTab = (label) => {
-      tabs.value = tabs.value.filter(tab => tab !== label)
-    }
-
-    provide('TAB_CONTAINER', {
-      addTab, removeTab, activeTab
+    provide(key, {
+      addTab(label) {
+        if (!tabs.value.length) activeTab.value = label
+        tabs.value.push(label)
+      },
+      removeTab(label) {
+        tabs.value = tabs.value.filter(tab => tab !== label)
+      },
+      activeTab
     })
 
     return { tabs, activeTab }
