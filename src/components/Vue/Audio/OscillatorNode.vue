@@ -1,5 +1,6 @@
 <script>
 import { inject, provide, onUpdated } from 'vue'
+import { key } from './AudioContext.vue'
 
 export default {
   props: {
@@ -7,7 +8,7 @@ export default {
     type: String
   },
   setup (props) {
-    const { audioContext, parentNode } = inject('AUDIO_CONTEXT')
+    const { audioContext, parentNode } = inject(key)
 
     const oscillator = audioContext.createOscillator()
     oscillator.type = props.type ?? 'sine'
@@ -18,11 +19,11 @@ export default {
     onUpdated(() => {
       oscillator.type = props.type ?? 'sine'
 
-      const endTime = audioContext.currentTime + .2;
-      oscillator.frequency.linearRampToValueAtTime(props.frequency, endTime);
+      const endTime = audioContext.currentTime + .2
+      oscillator.frequency.linearRampToValueAtTime(props.frequency, endTime)
     })
 
-    provide('AUDIO_CONTEXT', {
+    provide(key, {
       audioContext,
       parentNode: oscillator
     })

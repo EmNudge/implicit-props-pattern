@@ -34,9 +34,9 @@
       const playPause = () => 
         isPlaying.value = !isPlaying.value
 
-      const frequency = ref(300);
+      const frequency = ref(300)
       const changeFrequency = (e) => 
-        frequency.value = Number(e.currentTarget.value);
+        frequency.value = Number(e.currentTarget.value)
 
       return { isPlaying, playPause, frequency, changeFrequency }
     }

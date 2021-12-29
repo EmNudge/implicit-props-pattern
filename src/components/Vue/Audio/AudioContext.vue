@@ -1,14 +1,18 @@
 <script>
 import { provide, onUnmounted } from 'vue'
 
+export const key = Symbol();
+
 export default {
   setup () {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    const audioContext = new AudioContext();
+    const audioContext = new AudioContext()
 
     onUnmounted(() => audioContext.close())
 
-    provide('AUDIO_CONTEXT', { audioContext, parentNode: audioContext.destination })
+    provide(key, {
+      audioContext,
+      parentNode: audioContext.destination
+    })
   }
 }
 </script>
