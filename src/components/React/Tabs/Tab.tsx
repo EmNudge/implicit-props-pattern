@@ -7,6 +7,7 @@ const TabsContext = React.createContext({
 
 export const TabContent: React.FC<{ label: string}> = ({ children, label }) => {
   const { addTab, removeTab } = useContext(TabsContext);
+
   useEffect(() => {
     addTab(label, children);
     return () => removeTab(label);

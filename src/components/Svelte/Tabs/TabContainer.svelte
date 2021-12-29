@@ -6,27 +6,27 @@
 	import { setContext } from 'svelte';
 	import { writable } from 'svelte/store';
 	
-	const tabs = writable([]);
+	let tabs = [];
 	const activeTab = writable('');
 
-	const addTab = (label) => tabs.update(prev => {
-		if (!prev.length) activeTab.set(label)
-		return [...prev, label]
+	setContext(key, {
+		addTab(label) {
+			if (!tabs.length) activeTab.set(label);
+			tabs = [...tabs, label];
+		},
+		removeTab(label) {
+			tabs = tabs.filter(name => name !== label);
+		},
+		activeTab,
 	});
-	const removeTab = label => tabs.update(prev => {
-    const { [label]: x, ...rem } = tabs;
-    return rem;
-  });
-	
-	setContext(key, { addTab, removeTab, activeTab });
 </script>
 
 <div class="tabs-container">
 	<div class="tabs">
-		{#each $tabs as label}
+		{#each tabs as label}
 			<span
 				key={label}
-				class={label === $activeTab ? 'selected' : undefined}
+				class:selected={label === $activeTab}
 				on:click={() => $activeTab = label}
 			>
 				{label}

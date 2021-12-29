@@ -4,11 +4,9 @@
 	
 	export let label = '';
 	const { addTab, removeTab, activeTab } = getContext(key);
-	addTab(label)
-	
-	onDestroy(() => {
-		removeTab(label);
-	})
+
+	addTab(label);
+	onDestroy(() => removeTab(label));
 </script>
 
 {#if $activeTab === label}
