@@ -5,8 +5,8 @@ import {
 } from 'solid-js';
 
 const TabsContext = createContext({
-    addTab: (_label: string, _children) => { console.error('using old addTab') },
-    removeTab: (_label: string) => { console.error('using old removeTab') }
+    addTab: (_label: string, _children) => {},
+    removeTab: (_label: string) => {},
 });
 
 export const TabContent = (props: { label: string, children: Element[] | unknown }) => {
@@ -37,16 +37,6 @@ const TabsContainer = (props: { children: Element[] | unknown }) => {
         },
     };
 
-    const selectedTab = (() => {
-        const tab = tabs()[currentTab()];
-        if (!tab) {
-            const keysArr = Reflect.ownKeys(tabs());
-            if (keysArr.length) return keysArr[0];
-            return 'please add some tabs';
-        }
-        return tab;
-    });
-
     return (
         <div className="tabs-container">
             <div className="tabs">
@@ -65,7 +55,7 @@ const TabsContainer = (props: { children: Element[] | unknown }) => {
                 <TabsContext.Provider value={providerData}>
                     {props.children}
                 </TabsContext.Provider>
-                {selectedTab()}
+                {tabs()[currentTab()] || 'please add some tabs'}
             </div>
         </div>
     );
