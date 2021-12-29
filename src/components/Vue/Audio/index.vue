@@ -3,7 +3,11 @@
     {{ isPlaying ? 'Stop Audio' : 'Play Audio' }}
   </button>
 
-  <input type="range" min="100" max="1000" step="5" @input="changeFrequency">
+  <input 
+    type="range" min="100" max="1000" step="5" 
+    :value="frequency"
+    @input="changeFrequency"
+  />
 
   <AudioContextNode v-if="isPlaying">
     <GainNode :volume=".2">
@@ -38,6 +42,3 @@
     }
   }
 </script>
-
-<style>
-</style>
