@@ -6,13 +6,14 @@
 		<title>Implicit Props</title>
 		<link rel="stylesheet" type="text/css" href={Astro.resolve('../styles/global.css')} />
 		<style>
-            body {
+            main {
                 max-width: 1000px;
                 margin: 0 auto;
             }
 			h1 {
 				text-align: center;
 				margin: 0;
+                margin-bottom: -2px;
 			}
 		</style>
 	</head>
@@ -20,6 +21,8 @@
 	<body>
 		<h1>The Implicit Props Pattern</h1>
 		
-        <slot />
+        <main>
+            <slot />
+        </main>
 	</body>
 </html>
