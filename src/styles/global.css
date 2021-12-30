@@ -40,3 +40,21 @@ body {
 	margin-block-start: 0.83em;
     margin-block-end: 0.83em;
 }
+
+/* more specific styles */
+pre.astro-code {
+	padding: 15px;
+	font-size: 1.3em;
+}
+button {
+	box-shadow: 
+		inset 0px -2px 2px 0px #0000009c,
+		0px 4px 4px 4px #ffffff08;
+    border: none;
+    padding-bottom: 4px;
+    padding-top: 2px;
+    cursor: pointer;
+}
+button:active {
+	transform: translate(0, 1px) scaleY(.98);
+}
