@@ -5,7 +5,9 @@ const TabsContext = React.createContext({
   removeTab: () => {}
 });
 
-export const TabContent: React.FC<{ label: string}> = ({ children, label }) => {
+type Component<T = {}> = (props: T & { children: React.ReactNode }) => React.ReactNode;
+
+export const TabContent: Component<{ label: string}> = ({ children, label }) => {
   const { addTab, removeTab } = useContext(TabsContext);
 
   useEffect(() => {
@@ -16,8 +18,8 @@ export const TabContent: React.FC<{ label: string}> = ({ children, label }) => {
   return null;
 };
 
-const TabsContainer: React.FC = ({ children }) => {
-  const [tabs, setTabs] = useState<{ [label: string]: React.Element }>({});
+const TabsContainer: Component = ({ children }) => {
+  const [tabs, setTabs] = useState<{ [label: string]: React.ReactNode }>({});
   const [currentTab, setCurrentTab] = useState('');
 
   const providerData = useMemo(() => ({ 
