@@ -3,7 +3,7 @@ import { createContext, useContext, onCleanup, createEffect } from 'solid-js'
 
 const AudioContextContext = createContext({
   audioContext: null,
-  parentNode: null
+  parentNode: null,
 });
 
 export const AudioContextNode = (props: { children: unknown }) => {
@@ -11,7 +11,7 @@ export const AudioContextNode = (props: { children: unknown }) => {
 
   const providerData = {
     audioContext,
-    parentNode: audioContext.destination
+    parentNode: audioContext.destination,
   };
 
   onCleanup(() => audioContext.close());
@@ -37,7 +37,7 @@ export const GainNode = (props: { volume: number, children: unknown }) => {
 
   const providerData = {
     audioContext,
-    parentNode: gainNode
+    parentNode: gainNode,
   };
 
   return (
@@ -47,12 +47,12 @@ export const GainNode = (props: { volume: number, children: unknown }) => {
   );
 };
 
-export const OscillatorNode = (props: { type: string, frequency: number }) => {
+export const OscillatorNode = (props: { type: string, frequency: number, children?: unknown }) => {
   const { audioContext, parentNode } = useContext(AudioContextContext);
 
   const oscillator = audioContext.createOscillator();
-  oscillator.type = props.type || 'sine';
-  oscillator.frequency.value = props.frequency || 100;
+  oscillator.type = props.type ?? 'sine';
+  oscillator.frequency.value = props.frequency ?? 100;
   oscillator.connect(parentNode);
   oscillator.start(0);
 
@@ -64,6 +64,14 @@ export const OscillatorNode = (props: { type: string, frequency: number }) => {
 		oscillator.frequency.linearRampToValueAtTime(props.frequency, endTime);
   });
   
+  const providerData = {
+    audioContext,
+    parentNode: oscillator,
+  };
 
-  return null;
+  return (
+    <AudioContextContext.Provider value={providerData}>
+      {props.children}
+    </AudioContextContext.Provider>
+  );
 };

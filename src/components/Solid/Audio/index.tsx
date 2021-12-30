@@ -3,15 +3,15 @@ import { createSignal, Show } from "solid-js";
 import { AudioContextNode, GainNode, OscillatorNode } from './AudioContext'
 
 export default function App() {
-  const [showAudio, setShowAudio] = createSignal(false);
+  const [isPlaying, setIsPlaying] = createSignal(false);
   const [frequency, setFrequency] = createSignal(300);
   const changeFrequency = (e) =>
     setFrequency(Number(e.currentTarget.value));
 
   return (
-    <section>
-      <button onClick={() => setShowAudio(prev => !prev)}>
-        {showAudio() ? 'Stop' : 'Play'} Audio
+    <>
+      <button onClick={() => setIsPlaying(prev => !prev)}>
+        {isPlaying() ? 'Stop' : 'Play'} Audio
       </button>
 
       <input 
@@ -20,13 +20,13 @@ export default function App() {
         onInput={changeFrequency}
       />
   
-      <Show when={showAudio()}>
+      <Show when={isPlaying()}>
         <AudioContextNode>
           <GainNode volume={.2}>
             <OscillatorNode frequency={frequency()} type='sine' />
           </GainNode>
         </AudioContextNode>
       </Show>
-    </section>
+    </>
   );
 }
