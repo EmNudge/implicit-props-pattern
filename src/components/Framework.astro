@@ -5,7 +5,7 @@ export interface Props {
 const { name } = Astro.props;
 ---
 
-<div class="container">
+<div class="framework-container">
     <h2>{name}</h2>
 
     <h3>Audio Context</h3>
@@ -18,7 +18,7 @@ const { name } = Astro.props;
 </div>
 
 <style>
-    .container {
+    .framework-container {
         position: relative;
         outline: 2px solid aqua;
         padding: 20px;
@@ -40,6 +40,7 @@ const { name } = Astro.props;
         margin-bottom: 10px;
         font-weight: 400;
         letter-spacing: .25ch;
+        cursor: default;
     }
     hr {
         opacity: .5;

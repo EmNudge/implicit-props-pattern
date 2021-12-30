@@ -1,14 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { Code } from 'astro/components';
-
-const dedent = (...data) => {
-    const code = String.raw(...data)
-        .replace(/^\s*\n|\n\s*$/g, '')
-        .replace(/\t/g, '  ');
-    const indentLen = code.match(/\s+/)[0].length;
-    return code.replace(new RegExp(`^ {${indentLen}}`, 'gm'), '');
-};
+import CodeDedent from '../components/CodeDedent.astro';
 ---
 <style>
     a {
@@ -48,7 +40,7 @@ const dedent = (...data) => {
 
 <BaseLayout>
     <p>Using "Context" we can attach state to the component tree</p>
-    <Code code={dedent`
+    <CodeDedent code={`
         <body>
             <ParentComponent> <!-- set context here -->
                 <RandomNode />
@@ -64,14 +56,14 @@ const dedent = (...data) => {
 
             <ChildNode /> <!-- cannot access context -->
         </body>
-    `} lang="jsx" theme="dark-plus" />
+    `} lang="jsx" />
 
     <p>We can pass "props" to our child component without explicitly writing much</p>
-    <Code code={dedent`
+    <CodeDedent code={`
         <Container color="aqua"> <!-- context = ❴ color: 'aqua' ❵ -->
             <SayPhrase content="hello!"> <!-- color = getContext().color -->
         </Container>
-    `} lang="jsx" theme="dark-plus" />
+    `} lang="jsx" />
 
     <br>
     <div class="container">

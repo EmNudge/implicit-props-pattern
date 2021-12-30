@@ -1,0 +1,19 @@
+---
+import { Code } from 'astro/components';
+
+export interface Props {
+  code: string;
+  lang: string;
+}
+const { code, lang } = Astro.props;
+
+const dedent = (str: string) => {
+    const code = str
+        .replace(/^\s*\n|\n\s*$/g, '')
+        .replace(/\t/g, '  ');
+    const indentLen = code.match(/\s+/)[0].length;
+    return code.replace(new RegExp(`^ {${indentLen}}`, 'gm'), '');
+};
+---
+
+<Code code={dedent(code)} lang={lang} theme="dark-plus" />

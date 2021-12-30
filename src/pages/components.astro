@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Framework from '../components/Framework.astro';
+import CodeDedent from '../components/CodeDedent.astro';
 
 import VueAudio from '../components/Vue/Audio/index.vue';
 import VueTabs from '../components/Vue/Tabs/index.vue';
@@ -45,3 +46,73 @@ import SolidTabs from '../components/Solid/Tabs/index.tsx';
 		</Framework>
 	</div>
 </BaseLayout>
+
+<!-- code overlays -->
+<div class="audio-code hidden">
+	<CodeDedent lang="jsx" code={`
+		<AudioContextNode>
+			<GainNode volume=".2">
+				<OscillatorNode frequency="200" type='sine' />
+			</GainNode>
+		</AudioContextNode>
+	`}/>
+</div>
+<div class="tab-code hidden">
+	<CodeDedent lang="jsx" code={`
+		<TabContainer>
+			<TabContent label="tab 1">
+				<h1>Hello tab 1</h1>
+				<p>This is the first tab</p>
+			</TabContent>
+			<TabContent label="tab 2">
+				<h1>Hello tab 2</h1>
+				<p>This is the second tab</p>
+			</TabContent>
+		</TabContainer>
+	`}/>
+</div>
+
+<style>
+	.hidden {
+		display: none;
+		position: fixed;
+		top: 0; left: 0;
+		right: 0; bottom: 0;
+		background: #0004;
+		/* display: flex; */
+		justify-content: center;
+		align-items: center;
+		z-index: 5;
+		font-size: 1.15em;
+		line-height: 1.25;
+	}
+</style>
+
+<script>
+	const audioCode = document.querySelector('.audio-code');
+	const tabCode = document.querySelector('.tab-code');
+
+	function handleFrameworksClick(e) {
+		const node = e.target;
+		if (node.nodeName !== 'H3') return;
+
+		const containerMaybe = node.parentElement.parentElement;
+		if (containerMaybe !== e.currentTarget) return;
+
+		const clickedEl = node.textContent.startsWith('Audio')
+			? audioCode 
+			: tabCode;
+		
+		clickedEl.style.display = 'flex';
+		const handleCodeClick = (e) => {
+			if (e.target !== clickedEl) return;
+			clickedEl.removeEventListener('click', handleCodeClick);
+			clickedEl.style.display = 'none';
+		};
+		clickedEl.addEventListener('click', handleCodeClick);
+	}
+
+    document
+		.querySelector('.frameworks')
+		.addEventListener('click', handleFrameworksClick);
+</script>
