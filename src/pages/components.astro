@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Framework from '../components/Framework.astro';
+
+import VueAudio from '../components/Vue/Audio/index.vue';
+import VueTabs from '../components/Vue/Tabs/index.vue';
+import SvelteAudio from '../components/Svelte/Audio/index.svelte';
+import SvelteTabs from '../components/Svelte/Tabs/index.svelte';
+import ReactAudio from '../components/React/Audio/index.tsx';
+import ReactTabs from '../components/React/Tabs/index.tsx';
+import SolidAudio from '../components/Solid/Audio/index.tsx';
+import SolidTabs from '../components/Solid/Tabs/index.tsx';
+---
+
+<BaseLayout>
+	<style>
+		.frameworks {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-gap: 40px;
+			padding: 40px;
+		}
+	</style>
+
+	<div class="frameworks">
+		<Framework name="Vue">
+			<VueAudio client:visible slot="audio" />
+			<VueTabs client:visible slot="tabs" />
+		</Framework>
+
+		<Framework name="Svelte">
+			<SvelteAudio client:visible slot="audio" />
+			<SvelteTabs client:visible slot="tabs" />
+		</Framework>
+
+		<Framework name="React">
+			<ReactAudio client:visible slot="audio" />
+			<ReactTabs client:visible slot="tabs" />
+		</Framework>
+
+		<Framework name="Solid">
+			<SolidAudio client:visible slot="audio" />
+			<SolidTabs client:visible slot="tabs" />
+		</Framework>
+	</div>
+</BaseLayout>
