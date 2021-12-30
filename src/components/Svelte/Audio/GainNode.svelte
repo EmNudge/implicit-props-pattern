@@ -1,10 +1,10 @@
 <script>
 	import { getContext, setContext, beforeUpdate } from 'svelte';
-	
+	import { key } from './AudioContext.svelte';
+
 	export let volume = .2;
 	
-	const parentNode = getContext('audio-node');
-	const audioContext = getContext('audio-context');
+	const { audioContext, parentNode } = getContext(key);
 	
 	const gainNode = audioContext.createGain();
 	gainNode.connect(parentNode);
@@ -15,7 +15,10 @@
 		gainNode.gain.linearRampToValueAtTime(volume, endTime);
 	});
 	
-	setContext('audio-node', gainNode);
+	setContext(key, {
+		audioContext,
+		parentNode: gainNode,
+	});
 </script>
 
 <slot />

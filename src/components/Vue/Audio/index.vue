@@ -1,12 +1,11 @@
 <template>
-  <button @click="playPause">
-    {{ isPlaying ? 'Stop Audio' : 'Play Audio' }}
+  <button @click="isPlaying = !isPlaying">
+    {{ isPlaying ? 'Stop' : 'Play' }} Audio
   </button>
 
   <input 
     type="range" min="100" max="1000" step="5" 
-    :value="frequency"
-    @input="changeFrequency"
+    v-model="frequency"
   />
 
   <AudioContextNode v-if="isPlaying">
@@ -31,14 +30,9 @@
     },
     setup() {
       const isPlaying = ref(false)
-      const playPause = () => 
-        isPlaying.value = !isPlaying.value
-
       const frequency = ref(300)
-      const changeFrequency = (e) => 
-        frequency.value = Number(e.currentTarget.value)
 
-      return { isPlaying, playPause, frequency, changeFrequency }
+      return { isPlaying, frequency }
     }
   }
 </script>

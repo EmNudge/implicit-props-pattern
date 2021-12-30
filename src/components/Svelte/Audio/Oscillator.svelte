@@ -1,11 +1,11 @@
 <script>
 	import { getContext, setContext, beforeUpdate } from 'svelte';
-	
+	import { key } from './AudioContext.svelte';
+
 	export let frequency = 100;
 	export let type = 'sine';
 		
-	const parentNode = getContext('audio-node');
-	const audioContext = getContext('audio-context');
+	const { audioContext, parentNode } = getContext(key);
 	
 	const oscillator = audioContext.createOscillator();
 	oscillator.type = type;
@@ -20,5 +20,8 @@
 		oscillator.frequency.linearRampToValueAtTime(frequency, endTime);
 	});
 	
-	setContext('audio-node', parentNode);
+	setContext(key, {
+		audioContext,
+		parentNode: oscillator
+	});
 </script>
