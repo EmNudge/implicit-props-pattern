@@ -1,13 +1,13 @@
 import React, { useState, useContext, useEffect, useMemo } from 'react';
 
 const TabsContext = React.createContext({
-  addTab: () => {},
-  removeTab: () => {}
+  addTab: (_label: string, _children: React.ReactNode) => {},
+  removeTab: (_label: string) => {}
 });
 
-type Component<T = {}> = (props: T & { children: React.ReactNode }) => React.ReactNode;
+type Children = { children: React.ReactNode };
 
-export const TabContent: Component<{ label: string}> = ({ children, label }) => {
+export const TabContent = ({ children, label }: { label: string } & Children) => {
   const { addTab, removeTab } = useContext(TabsContext);
 
   useEffect(() => {
@@ -18,12 +18,12 @@ export const TabContent: Component<{ label: string}> = ({ children, label }) => 
   return null;
 };
 
-const TabsContainer: Component = ({ children }) => {
+const TabsContainer = ({ children }: Children) => {
   const [tabs, setTabs] = useState<{ [label: string]: React.ReactNode }>({});
   const [currentTab, setCurrentTab] = useState('');
 
   const providerData = useMemo(() => ({ 
-    addTab(label: string, children: React.Element) {
+    addTab(label: string, children: React.ReactNode) {
       setTabs(prev => {
         if (!Object.keys(prev).length) setCurrentTab(label);
         return { ...prev, [label]: children };
@@ -49,6 +49,7 @@ const TabsContainer: Component = ({ children }) => {
         ))}
       </div>
       <div className="content">
+        {/* @ts-ignore */}
         <TabsContext.Provider value={providerData}>
           {children}
         </TabsContext.Provider>

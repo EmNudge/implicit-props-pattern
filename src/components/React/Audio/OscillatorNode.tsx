@@ -2,11 +2,12 @@ import React, { useEffect, useContext, useMemo } from 'react';
 import { AudioContextContext } from './AudioContext';
 
 interface Props {
-    frequency?: number;
-    type?: string;
+  children?: React.ReactNode
+  frequency?: number;
+  type?: string;
 }
 
-const OscillatorNode: React.FC<Props> = ({ children, frequency, type }) => {
+const OscillatorNode = ({ children, frequency, type }: Props) => {
   const { audioContext, parentNode } = useContext(AudioContextContext);
 
   const oscillator = useMemo(() => {
@@ -37,6 +38,7 @@ const OscillatorNode: React.FC<Props> = ({ children, frequency, type }) => {
   }, [frequency]);
 
   return (
+    // @ts-ignore
     <AudioContextContext.Provider value={providerData}>
       {children}
     </AudioContextContext.Provider>

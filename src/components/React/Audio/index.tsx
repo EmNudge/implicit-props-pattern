@@ -1,3 +1,4 @@
+/** @jsxImportSource react */
 import { default as AudioContextNode } from './AudioContext';
 import { default as GainNode } from './GainNode';
 import { default as OscillatorNode } from './OscillatorNode';
@@ -7,7 +8,7 @@ export default function App() {
   const [showAudio, setShowAudio] = useState(false);
 
   const [frequency, setFrequency] = useState(300);
-  const changeFrequency = (e: React.InputEvent) =>
+  const changeFrequency = (e: React.SyntheticEvent<{ value: string }>) =>
     setFrequency(Number(e.currentTarget.value));
 
   return (

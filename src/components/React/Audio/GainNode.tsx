@@ -1,7 +1,12 @@
 import React, { useEffect, useContext, useMemo } from 'react';
 import { AudioContextContext } from './AudioContext';
 
-const GainNode: React.FC<{ volume?: number }> = ({ children, volume }) => {
+interface Props {
+  children: React.ReactNode;
+  volume?: number;
+}
+
+const GainNode = ({ children, volume }: Props) => {
   const { audioContext, parentNode } = useContext(AudioContextContext);
 
   const gainNode = useMemo(() => {
@@ -26,6 +31,7 @@ const GainNode: React.FC<{ volume?: number }> = ({ children, volume }) => {
   }, [volume]);
 
   return (
+    // @ts-ignore
     <AudioContextContext.Provider value={providerData}>
       {children}
     </AudioContextContext.Provider>

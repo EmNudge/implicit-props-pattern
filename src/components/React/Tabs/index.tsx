@@ -1,4 +1,3 @@
-import React from 'react';
 import TabContainer, { TabContent } from './Tab';
 
 export default function App() {
