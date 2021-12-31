@@ -1,3 +1,4 @@
+/** @jsxImportSource react */
 import TabContainer, { TabContent } from './Tab';
 
 export default function App() {

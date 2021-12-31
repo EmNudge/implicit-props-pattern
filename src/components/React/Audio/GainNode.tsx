@@ -1,5 +1,6 @@
+/** @jsxImportSource react */
 import React, { useEffect, useContext, useMemo } from 'react';
-import { AudioContextContext } from './AudioContext';
+import { AudioContextContext, useUnmounted } from './AudioContext';
 
 interface Props {
   children: React.ReactNode;
@@ -17,18 +18,17 @@ const GainNode = ({ children, volume }: Props) => {
     return node;
   }, []);
 
-  const providerData = useMemo(
-    () => ({
-      audioContext,
-      parentNode: gainNode
-    }),
-    [volume]
-  );
+  const providerData = useMemo(() => ({
+    audioContext,
+    parentNode: gainNode
+  }), []);
 
   useEffect(() => {
     const endTime = audioContext.currentTime + .1;
     gainNode.gain.linearRampToValueAtTime(volume, endTime);
   }, [volume]);
+
+  useUnmounted(() => gainNode.disconnect(parentNode));
 
   return (
     // @ts-ignore

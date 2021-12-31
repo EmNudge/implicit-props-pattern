@@ -1,5 +1,6 @@
+/** @jsxImportSource react */
 import React, { useEffect, useContext, useMemo } from 'react';
-import { AudioContextContext } from './AudioContext';
+import { AudioContextContext, useUnmounted } from './AudioContext';
 
 interface Props {
   children?: React.ReactNode
@@ -20,13 +21,10 @@ const OscillatorNode = ({ children, frequency, type }: Props) => {
     return node;
   }, []);
 
-  const providerData = useMemo(
-    () => ({
-      audioContext,
-      parentNode: oscillator
-    }),
-    [frequency, type]
-  );
+  const providerData = useMemo(() => ({
+    audioContext,
+    parentNode: oscillator
+  }), []);
 
   useEffect(() => {
     oscillator.type = type ?? 'sine';
@@ -36,6 +34,8 @@ const OscillatorNode = ({ children, frequency, type }: Props) => {
     const endTime = audioContext.currentTime + .2;
     oscillator.frequency.linearRampToValueAtTime(frequency, endTime);
   }, [frequency]);
+
+  useUnmounted(() => oscillator.disconnect(parentNode));
 
   return (
     // @ts-ignore

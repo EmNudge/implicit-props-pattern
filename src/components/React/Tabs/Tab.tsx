@@ -1,3 +1,4 @@
+/** @jsxImportSource react */
 import React, { useState, useContext, useEffect, useMemo } from 'react';
 
 const TabsContext = React.createContext({

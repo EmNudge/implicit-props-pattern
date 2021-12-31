@@ -1,3 +1,4 @@
+/** @jsxImportSource react */
 import React, { useEffect, useMemo } from 'react';
 
 export const AudioContextContext = React.createContext({
@@ -5,19 +6,19 @@ export const AudioContextContext = React.createContext({
   parentNode: null
 });
 
-const AudioContextNode = ({ children }: { children: React.ReactNode }) => {
-  const audioContext = useMemo(() => new window.AudioContext(), []);
+export const useUnmounted = (func: () => any) => 
+  useEffect(() => () => void func(), []);
 
-  const providerData = useMemo(
-    () => ({
-      audioContext,
-      parentNode: audioContext.destination
-    }),
-    []
-  );
+const AudioContextNode = ({ children }: { children: React.ReactNode }) => {
+  const audioContext = useMemo(() => new AudioContext(), []);
+
+  const providerData = useMemo(() => ({
+    audioContext,
+    parentNode: audioContext.destination
+  }), []);
 
   // React's onUnmounted
-  useEffect(() => () => void audioContext.close(), []);
+  useUnmounted(() => audioContext.close());
 
   return (
     // @ts-ignore

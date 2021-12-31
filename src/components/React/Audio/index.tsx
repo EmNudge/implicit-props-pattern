@@ -12,9 +12,9 @@ export default function App() {
     setFrequency(Number(e.currentTarget.value));
 
   return (
-    <div>
+    <>
       <button onClick={() => setShowAudio(prev => !prev)}>
-        {showAudio ? 'Stop Audio' : 'PlayAudio'}
+        {showAudio ? 'Stop' : 'Play'} Audio
       </button>
 
       <input 
@@ -30,6 +30,6 @@ export default function App() {
           </GainNode>
         </AudioContextNode>
       )}
-    </div>
+    </>
   );
 }
